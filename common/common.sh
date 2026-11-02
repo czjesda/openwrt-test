@@ -621,14 +621,15 @@ esac
 [[ -d "${HOME_PATH}/build/common/Share/luci-app-samba4" ]] && rm -rf ${HOME_PATH}/build/common/Share/luci-app-samba4
 amba4="$(find . -type d -name 'luci-app-samba4')"
 autosam="$(find . -type d -name 'autosamba')"
-if [[ -z "${amba4}" ]] && [[ -n "${autosam}" ]]; then
-  for X in "$(find . -type d -name 'autosamba')/Makefile"; do sed -i "s?+luci-app-samba4?+luci-app-samba?g" "$X"; done
-else
-  for X in "$(find . -type d -name 'autosamba')/Makefile"; do
-    if [[ `grep -c "+luci-app-samba4" $X` -eq '0' ]]; then
-      sed -i "s?+luci-app-samba?+luci-app-samba4?g" "$X"
+
+if [[ -n "${autosam}" ]]; then
+  if [[ -z "${amba4}" ]]; then
+    sed -i "s?+luci-app-samba4?+luci-app-samba?g" "${autosam}/Makefile"
+  else
+    if [[ $(grep -c "+luci-app-samba4" "${autosam}/Makefile") -eq 0 ]]; then
+      sed -i "s?+luci-app-samba?+luci-app-samba4?g" "${autosam}/Makefile"
     fi
-  done
+  fi
 fi
 
 # files大法，设置固件无烦恼
