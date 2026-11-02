@@ -1979,7 +1979,7 @@ cd UPLOAD
 BRANCH_HEAD="$(git rev-parse --abbrev-ref HEAD)"
 git add .
 git commit -m "${kaisbianyixx}-${FOLDER_NAME}-${LUCI_EDITION}-${TARGET_PROFILE}固件"
-git push --force "https://${REPO_TOKEN}@github.com/${GIT_REPOSITORY}" HEAD:${BRANCH_HEAD}
+git push --force "https://x-access-token:${REPO_TOKEN}@github.com/${GIT_REPOSITORY}.git" HEAD:${BRANCH_HEAD}
 }
 
 
