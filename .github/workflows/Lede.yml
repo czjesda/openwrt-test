@@ -1,4 +1,4 @@
-#
+
 # REPO_TOKEN密匙制作教程：https://git.io/jm.md
 #
 #
@@ -79,7 +79,7 @@ on:
       UPDATE_FIRMWARE_ONLINE:
         description: '增加在线更新固件功能/自动打包Amlogic_Rockchip系列固件'
         required: false
-        default: 'true'
+        default: 'false'
         type: boolean
       COMPILATION_INFORMATION:
         description: '是否显示编译信息'
@@ -206,7 +206,7 @@ jobs:
     
     - name: SSH远程连接服务器
       if: ${{ env.SSH_ACTIONS == 'true' || github.event.inputs.SSH_ACTION == 'true' }}
-      timeout-minutes: 32
+      timeout-minutes: 120
       run: |
         chmod +x ${GITHUB_WORKSPACE}/openwrt/build/debug-ssh.sh
         /bin/bash "${GITHUB_WORKSPACE}/openwrt/build/debug-ssh.sh"
