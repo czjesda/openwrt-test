@@ -124,11 +124,21 @@ TMATE_SOCK="/tmp/tmate-${SESSION_ID}.sock"
 
 # 启动 tmate 会话
 tmate -S "$TMATE_SOCK" new-session -d -s "$SESSION_ID"
-tmate -S "$TMATE_SOCK" wait tmate-ready
 
-# 获取连接信息
-SSH_INFO=$(tmate -S "$TMATE_SOCK" display -p '#{tmate_ssh}')
-SSH_CMD=$(echo "$SSH_INFO" | cut -d ' ' -f2)
+echo "正在连接 tmate 服务器..."
+
+if ! timeout 60 tmate -S "$TMATE_SOCK" wait tmate-ready; then
+  echo "⚠️ tmate 服务器连接失败或超时"
+  echo "tmate 调试日志："
+  tmate -S "$TMATE_SOCK" show-messages 2>/dev/null || true
+
+  SSH_INFO=""
+  SSH_CMD=""
+else
+  SSH_INFO="$(tmate -S "$TMATE_SOCK" display -p '#{tmate_ssh}')"
+  SSH_CMD="$(echo "$SSH_INFO" | cut -d ' ' -f2)"
+  echo "✅ tmate SSH 连接已建立"
+fi
 
 # 设置 Web 终端
 setup_web_terminal || true
