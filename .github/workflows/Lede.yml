@@ -47,7 +47,7 @@ on:
       CPU_SELECTION:
         description: 'CPU优选,增加编译速度(8573C=第五代至强,ubuntu-24.04机型池最新最快)'
         required: true
-        default: '8573C'
+        default: '默认'
         type: choice
         options:
           - '8573C'
