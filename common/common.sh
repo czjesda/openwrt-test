@@ -586,11 +586,9 @@ mv -f uniq.conf feeds.conf.default
 #sed -i 's@src-git luci@# src-git luci@g' feeds.conf.default
 #sed -i 's@## src-git luci@src-git luci@g' feeds.conf.default
 sed -i 's@.*dalang*@#&@g' "feeds.conf.default"
-sed -i 's@.*src-git lienol*@#&@g' "feeds.conf.default"
 sed -i 's@.*src-git other*@#&@g' "feeds.conf.default"
 ./scripts/feeds update -a
 sed -i 's/^#\(.*dalang\)/\1/' "feeds.conf.default"
-sed -i 's/^#\(.*src-git lienol\)/\1/' "feeds.conf.default"
 sed -i 's/^#\(.*src-git other\)/\1/' "feeds.conf.default"
 
 # 正在执行插件语言修改
@@ -622,10 +620,6 @@ if [[ -n "$(grep "set network.\${1}6.device" "${GENE_PATH}")" ]]; then
 else
   ifnamee="uci set network.ipv6.ifname='@lan'"
   set_add="uci set firewall.@zone[0].network='lan ipv6'"
-fi
-
-if [[ "${SOURCE_CODE}" == "OFFICIAL" ]] && [[ "${REPO_BRANCH}" == "openwrt-19.07" ]]; then
-  devicee="uci set network.ipv6.device='@lan'"
 fi
 
 # AdGuardHome内核
