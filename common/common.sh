@@ -126,7 +126,17 @@ COOLSNOWWOLF)
   export REPO_URL="https://github.com/coolsnowwolf/lede"
   export SOURCE="Lede"
   export SOURCE_OWNER="Lean's"
-  export LUCI_EDITION="18.06"
+
+  LUCI_EDITION="$(curl -fsSL "https://raw.githubusercontent.com/coolsnowwolf/lede/${REPO_BRANCH}/feeds.conf.default" \
+    | grep -E '^src-git[[:space:]]+luci[[:space:]]+' \
+    | sed -n 's/.*openwrt-\([0-9][0-9.]*\).*/\1/p' \
+    | head -n 1)"
+
+  if [[ -z "${LUCI_EDITION}" ]]; then
+    LUCI_EDITION="Unknown"
+  fi
+
+  export LUCI_EDITION
   export DIY_WORK="${FOLDER_NAME}master"
 ;;
 LIENOL)
