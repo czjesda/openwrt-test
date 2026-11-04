@@ -191,7 +191,13 @@ jobs:
         cd openwrt
         make defconfig
         make download -j16
-    
+        
+    - name: 检查 fs.mk
+      run: |
+        cd openwrt
+        echo "===== package/kernel/linux/modules/fs.mk 第 1-40 行 ====="
+        nl -ba package/kernel/linux/modules/fs.mk | sed -n '1,40p'
+        
     - name: 开始编译固件
       id: compile
       run: |
