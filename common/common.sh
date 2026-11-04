@@ -1809,14 +1809,8 @@ chmod -R +x ${start_path} && source ${start_path}
 
 case "${CPU_SELECTION}" in
 false)
-  if [[ `echo "${cpu_model}" |grep -ic "E5"` -eq '1' ]]; then
-    export chonglaixx="E5-重新编译(实际:${cpu_model})"
-    export chonglaiss="是E5的CPU"
-    export Continue_selecting="1"
-  else
-    TIME g " 恭喜,不是E5系列的CPU啦"
-    export Continue_selecting="0"
-  fi
+  TIME g "使用系统分配CPU：${cpu_model}"
+  export Continue_selecting="0"
 ;;
 8573|7763|8370|8272|8171)
   if [[ `echo "${cpu_model}" |grep -ic "${CPU_SELECTION}"` -eq '0' ]]; then
