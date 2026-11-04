@@ -130,7 +130,7 @@ jobs:
     - name: 准备结束
       uses: actions/checkout@v4
 
-      - name: 检查 common.sh 语法
+    - name: 检查 common.sh 语法
       run: |
         bash -n common/common.sh
 
