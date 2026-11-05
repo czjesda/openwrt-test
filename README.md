@@ -6,7 +6,7 @@
 >    - 软件源地址:`https://shidahuilang.github.io/openwrt-test/x86_64/...`
 >    - 路由器上使用:`opkg update && opkg install <插件名>`
 
-## `【大灰狼独家优化】（IPV6大全版  6.6 内核【带DOCKER】`
+## `【大灰狼独家优化】`
 #### 🚩 源码拉取`coolsnowwolf` `immortalwrt`自行选择编译
 - 默认IP地址：`192.168.2.1`
 - 账户：`root`   密码：`空`
